@@ -1,0 +1,50 @@
+/* assets/css/classic.css */
+
+body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #f8f1e3;
+}
+
+#aiconn-chat-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    background-color: #f5e5c5;
+    border: 1px solid #b38d68;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+/* Other styles remain the same as default.css */
+
+.aiconn-chat-header {
+    background-color: #b38d68;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.aiconn-chat-message-user {
+    background-color: #b38d68;
+    color: #fff;
+    text-align: right;
+}
+
+.aiconn-chat-message-bot {
+    background-color: #f5e5c5;
+    color: #333;
+}
+
+.aiconn-chat-input {
+    padding: 10px;
+    border-top: 1px solid #b38d68;
+}
+
+#aiconn-chat-text {
+    flex-grow: 1;
+   

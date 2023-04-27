@@ -1,0 +1,104 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AI Connecter\n"
+"POT-Creation-Date: 2023-04-21 12:00+0000\n"
+"PO-Revision-Date: 2023-04-22 11:53+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: inc/settings.php:3
+msgid "This plugin integrates OpenAI API and ChatGPT service for WordPress and WooCommerce."
+msgstr "Este plugin integra un servicio la API OpenAI y ChatGPT para WordPress y WooCommerce."
+
+msgid "ChatGPT Support Plugin Settings"
+msgstr "Configuración de ChatGPT Support Plugin"
+
+msgid "API Key"
+msgstr "Clave API"
+
+msgid "Enable Chatbot"
+msgstr "Habilitar Chatbot"
+
+msgid "Default message"
+msgstr "Mensaje predeterminado"
+
+msgid "Style"
+msgstr "Estilo"
+
+msgid "Position"
+msgstr "Posición"
+
+msgid "Colors"
+msgstr "Colores"
+
+msgid "\"Support\" word"
+msgstr "Palabra \"Soporte\""
+
+msgid "\"Send\" word"
+msgstr "Palabra \"enviar\""
+
+msgid "Text \"Write your message...\""
+msgstr "Texto \"Escriba su mensaje...\""
+
+msgid "Support"
+msgstr "Support"
+
+msgid "Send"
+msgstr "Enviar"
+
+msgid "Write your message..."
+msgstr "Escriba su mensaje..."
+
+msgid "Add the API Key provided in the developer website."
+msgstr "Ingrese su API Key proporcionada por el sitio web del desarrollador."
+
+msgid "API Status:"
+msgstr "Estado de la conexión API:"
+
+msgid "Connected"
+msgstr "Conectado"
+
+msgid "Available Tokens:"
+msgstr "Tokens restantes:"
+
+msgid "Not connected"
+msgstr "Error de conexión"
+
+msgid "Go to the developer website"
+msgstr "Visitar el sitio del desarrollador"
+
+msgid "Welcome to our AI support."
+msgstr "Bienvenido a tu soporte IA."
+
+msgid "Header:"
+msgstr "Encabezado:"
+
+msgid "Header Text:"
+msgstr "Texto del encabezado:"
+
+msgid "User Message:"
+msgstr "Mensaje del usuario:"
+
+msgid "Bot Message:"
+msgstr "Mensaje del bot:"
+
+msgid "Send Button:"
+msgstr "Botón de envío:"
+
+msgid "Send Button Text:"
+msgstr "Texto del botón de envío:"
+
+msgid "Default"
+msgstr "Predeterminado"
+
+msgid "Bottom Right"
+msgstr "Inferior derecho"
+
+msgid "Bottom Left"
+msgstr "Inferior izquierdo"
