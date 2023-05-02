@@ -1,19 +1,20 @@
 <?php // archivo inc/seo-post-creator.php
-function aiconn_seo_post_creator_page_content() {
+function aiconn_seo_post_creator_page_content()
+{
     ?>
     <div class="wrap">
-        <h1><?php _e('SEO Post Creator', 'aiconnecter'); ?></h1>
+        <h1>
+            <?php _e('SEO Post Creator', 'aiconnecter'); ?>
+        </h1>
         <?php aiconn_seo_post_creator_form(); ?>
     </div>
     <?php
 }
 
-function aiconn_seo_post_creator_page() {
+function aiconn_seo_post_creator_page()
+{
     // Registro de configuraciones
-    register_setting('ai_connecter_seo_post', 'aiconn_post_rules');
-    register_setting('ai_connecter_seo_post', 'aiconn_post_title');
-    register_setting('ai_connecter_seo_post', 'aiconn_post_keywords');
-    
+    register_setting('ai_connecter_seo_post', 'aiconn_post_description');
 
     // Creación de sección
     add_settings_section(
@@ -25,67 +26,39 @@ function aiconn_seo_post_creator_page() {
 
     // Creación de campos de configuración
     add_settings_field(
-        'aiconn_post_rules',
-        __('Post Rules', 'aiconnecter'),
-        'aiconn_post_rules_render',
-        'ai_connecter_seo_post',
-        'aiconn_seo_post_settings_section'
-    );
-
-    add_settings_field(
-        'aiconn_post_title',
-        __('Post Title', 'aiconnecter'),
-        'aiconn_post_title_render',
-        'ai_connecter_seo_post',
-        'aiconn_seo_post_settings_section'
-    );
-
-    add_settings_field(
-        'aiconn_post_keywords',
-        __('Post Keywords', 'aiconnecter'),
-        'aiconn_post_keywords_render',
+        'aiconn_post_description',
+        __('Post Description', 'aiconnecter'),
+        'aiconn_post_description_render',
         'ai_connecter_seo_post',
         'aiconn_seo_post_settings_section'
     );
 }
 add_action('admin_init', 'aiconn_seo_post_creator_page');
 
-function aiconn_seo_post_settings_section_callback() {
+function aiconn_seo_post_settings_section_callback()
+{
     echo __('Generate SEO-optimized posts using the AI Connecter service.', 'aiconnecter');
 }
-function aiconn_post_rules_render() {
-    $post_rules = get_option('aiconn_post_rules', '');
+function aiconn_post_description_render()
+{
+    $post_description = get_option('aiconn_post_description', '');
     ?>
-    <input type='text' name='aiconn_post_rules' value='<?php echo esc_attr($post_rules); ?>' size='50'>
-    <p class="description"><?php _e('Example: "Write a 550-word article about this product." or "Write a review about this services"', 'aiconnecter'); ?></p>
+    <textarea name='aiconn_post_description' rows='5' cols='50'><?php echo esc_textarea($post_description); ?></textarea>
+    <p class="description">
+        <?php _e('Provide a detailed description for the post, including title, keywords, and any specific instructions.', 'aiconnecter'); ?>
+    </p>
     <?php
 }
 
-function aiconn_post_title_render() {
-    $post_title = get_option('aiconn_post_title', '');
-    ?>
-    <input type='text' name='aiconn_post_title' value='<?php echo esc_attr($post_title); ?>' size='50'>
-    <?php
-}
-
-function aiconn_post_keywords_render() {
-    $post_keywords = get_option('aiconn_post_keywords', '');
-    ?>
-    <input type='text' name='aiconn_post_keywords' value='<?php echo esc_attr($post_keywords); ?>' size='50'>
-    <p class="description"><?php _e('Separate keywords with commas.', 'aiconnecter'); ?></p>
-    <?php
-}
-
-function aiconn_seo_post_creator_form() {
+function aiconn_seo_post_creator_form()
+{
     // Verificar si se envió el formulario
     if (isset($_POST['aiconn_create_post']) && check_admin_referer('aiconn_create_seo_post_draft')) {
         // Recuperar las opciones de configuración desde el formulario
-        $post_title = sanitize_text_field($_POST['aiconn_post_title']);
-        $post_keywords = sanitize_text_field($_POST['aiconn_post_keywords']);
-        $post_rules = sanitize_text_field($_POST['aiconn_post_rules']);
+        $post_description = sanitize_textarea_field($_POST['aiconn_post_description']);
 
         // Crear el post como borrador y recuperar el ID del post creado
-        $post_id = aiconn_create_seo_post_draft($post_title, $post_keywords, $post_rules);
+        $post_id = aiconn_create_seo_post_draft($post_description);
 
         // Mostrar un mensaje de éxito
         echo '<div class="notice notice-success is-dismissible"><p>';
@@ -98,7 +71,7 @@ function aiconn_seo_post_creator_form() {
         <div class="aiconn-settings-container">
             <div class="aiconn-settings-block">
                 <form method="post" action="">
-                   <?php
+                    <?php
                     // Mostrar los campos de configuración
                     settings_fields('ai_connecter_seo_post');
                     do_settings_sections('ai_connecter_seo_post');
@@ -109,7 +82,8 @@ function aiconn_seo_post_creator_form() {
                     // Añadir el botón para crear el post
                     ?>
                     <p>
-                        <input type="submit" name="aiconn_create_post" class="button button-primary" value="<?php _e('Create Post as Draft', 'aiconnecter'); ?>">
+                        <input type="submit" name="aiconn_create_post" class="button button-primary"
+                            value="<?php _e('Create Post as Draft', 'aiconnecter'); ?>">
                     </p>
                 </form>
             </div>
@@ -118,13 +92,13 @@ function aiconn_seo_post_creator_form() {
     <?php
 }
 
-function aiconn_create_seo_post_draft($post_title, $post_keywords, $post_rules) {
-
-    $prompt = $post_rules . '. ' . $post_title . '. ' . $post_keywords;
+function aiconn_create_seo_post_draft($post_description)
+{
+    $prompt = $post_description;
 
     // error_log('Prompt (WordPress backend): ' . $prompt);
 
-    // Obtén el contenido del post a través de la API usando $post_rules
+    // Obtén el contenido del post a través de la API usando $post_description
     $api_key = aiconn_get_api_key();
     $post_content = aiconn_get_post_response($api_key, $prompt);
 
@@ -133,7 +107,10 @@ function aiconn_create_seo_post_draft($post_title, $post_keywords, $post_rules) 
         return false;
     }
 
-    
+    // Extraer el título del post desde $post_description
+    preg_match('/(?<=\. ).*(?=\.)|(?<=\. ).*(?=\,)|(?<=\, ).*(?=\,)|(?<=\, ).*(?=\.)/', $post_description, $matches);
+    $post_title = !empty($matches) ? $matches[0] : 'Untitled';
+
     // Crear un nuevo post
     $post_data = array(
         'post_title' => $post_title,
@@ -146,9 +123,13 @@ function aiconn_create_seo_post_draft($post_title, $post_keywords, $post_rules) 
     // Insertar el post como borrador
     $post_id = wp_insert_post($post_data);
 
+    // Extraer las palabras clave desde $post_description
+    preg_match_all('/(?<=\,).*(?=\,)|(?<=\,).*(?=\.)|(?<=\,).*(?=\.)/', $post_description, $keyword_matches);
+    $keywords = !empty($keyword_matches[0]) ? array_map('trim', $keyword_matches[0]) : array();
+
     // Añadir las palabras clave como taxonomía personalizada o meta data
-    // Separar las palabras clave por comas antes de añadirlas como etiquetas (tags)
-    wp_set_object_terms($post_id, $post_keywords, 'post_tag');
+    wp_set_object_terms($post_id, $keywords, 'post_tag');
 
     return $post_id;
+
 }
