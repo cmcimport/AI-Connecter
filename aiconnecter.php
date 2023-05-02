@@ -17,7 +17,10 @@ if (!defined('WPINC')) {
 
 // Incluir archivos necesarios
 require_once(plugin_dir_path(__FILE__) . 'inc/api-functions.php');
+require_once(plugin_dir_path(__FILE__) . 'inc/config.php');
 require_once(plugin_dir_path(__FILE__) . 'inc/settings.php');
+require_once(plugin_dir_path(__FILE__) . 'inc/chatbot.php');
+require_once(plugin_dir_path(__FILE__) . 'inc/seo-post-creator.php');
 require_once(plugin_dir_path(__FILE__) . 'inc/frontend.php');
 
 // Activación del plugin
@@ -36,3 +39,5 @@ function aiconn_support_plugin_load_textdomain() {
     load_plugin_textdomain('aiconnecter', false, basename(dirname(__FILE__)) . '/languages');
 }
 add_action('plugins_loaded', 'aiconn_support_plugin_load_textdomain');
+
+

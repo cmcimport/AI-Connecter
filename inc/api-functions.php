@@ -37,3 +37,22 @@ function aiconn_get_chat_response($api_key, $message) {
 
     return false;
 }
+
+function aiconn_get_post_response($api_key, $message) {
+    $api_url = 'https://www.aiconnecter.com/handle_post_request.php';
+    $response = wp_remote_post($api_url, [
+        'body' => ['api_key' => $api_key, 'message' => $message]
+    ]);
+
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+
+    if (isset($body['error']) && !empty($body['error'])) {
+        return false;
+    }
+
+    if (isset($body['response']) && !empty($body['response'])) {
+        return $body['response'];
+    }
+
+    return false;
+}
