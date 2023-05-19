@@ -109,7 +109,7 @@ function aiconn_create_seo_post_draft($post_description)
 
     // Extraer el título del post desde $post_description
     preg_match('/(?<=\. ).*(?=\.)|(?<=\. ).*(?=\,)|(?<=\, ).*(?=\,)|(?<=\, ).*(?=\.)/', $post_description, $matches);
-    $post_title = !empty($matches) ? $matches[0] : 'Untitled';
+    $post_title = !empty($matches) ? $matches[0] : 'AI SEO Post';
 
     // Crear un nuevo post
     $post_data = array(

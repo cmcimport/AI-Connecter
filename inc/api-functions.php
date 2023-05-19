@@ -45,8 +45,11 @@ function aiconn_get_post_response($api_key, $message) {
     ]);
 
     $body = json_decode(wp_remote_retrieve_body($response), true);
+    
+    error_log('Response Body: ' . print_r($body, true));  // Agregue esta línea
 
     if (isset($body['error']) && !empty($body['error'])) {
+        error_log('API Error: ' . $body['error']);  // Agregue esta línea
         return false;
     }
 
@@ -56,3 +59,4 @@ function aiconn_get_post_response($api_key, $message) {
 
     return false;
 }
+
